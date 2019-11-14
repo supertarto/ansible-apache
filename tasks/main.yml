@@ -44,7 +44,7 @@
 - name: Add vhosts
   template:
     src: "vhosts.conf.j2"
-    dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
+    dest: "{{ apache_server_conf }}/sites-available/{{ apache_vhosts_filename }}"
     owner: root
     group: root
     mode: "0644"
@@ -53,15 +53,15 @@
 
 - name: Delete default vhosts in site-enabled
   file:
-    path: "{{ apache_conf_path }}/sites-enabled/{{ apache_default_vhost_filename }}"
+    path: "{{ apache_server_conf }}/sites-enabled/{{ apache_default_vhost_filename }}"
     state: absent
   notify: Restart apache
   when: apache_remove_default_vhost
 
 - name: Vhost symlink in site-enabled
   file:
-    src: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
-    dest: "{{ apache_conf_path }}/sites-enabled/{{ apache_vhosts_filename }}"
+    src: "{{ apache_server_conf }}/sites-available/{{ apache_vhosts_filename }}"
+    dest: "{{ apache_server_conf }}/sites-enabled/{{ apache_vhosts_filename }}"
     state: link
   notify: Restart apache
   when: apache_create_vhosts
