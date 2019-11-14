@@ -1,0 +1,52 @@
+{% for vhost in apache_vhost_config%}
+<VirtualHost {{ virtualhost.listen_ip }}:{{ vhost.listen_port }}>
+
+    ServerName  {{ vhost.server_name }}
+{% if vhost.serveralias is defined %}
+    ServerAlias {{ vhost.serveralias }}
+{% endif %}
+{% if vhost.documentroot is defined %}
+    DocumentRoot "{{ vhost.documentroot }}"
+{% endif %}
+{% if vhost.serveradmin is defined %}
+    ServerAdmin {{ vhost.serveradmin }}
+{% endif %}
+{% if vhost.custom_param is defined %}
+        {{ vhost.custom_param }}
+{% endif %}
+{% if vhost.ssl_engine is defined%}
+    SSLEngine {{ vhost.ssl_engine }}
+    SSLCertificateFile {{ vhost.ssl_certificate_file }}
+    SSLCertificateKeyFile {{ vhost.ssl_certificate_key_file }}
+    {% if vhost.ssl_certificate_chain_file is defined%}
+        SSLCertificateChainFile {{ vhost.ssl_certificate_chain_file }}
+    {% endif%}
+{% endif %}
+# Directory
+{% if vhost.directory is defined %}
+    {% for directory in vhost.directory %}
+        <Directory "{{ directory.path }}">
+            {{ directory.config }}
+        </Directory>
+    {% endfor %}
+{% endif %}
+# Location
+{% if vhost.location is defined %}
+    {% for location in vhost.location %}
+        <Location "{{ location.path }}">
+            {{ location.config }}
+        </Location>
+    {% endfor %}
+{% endif %}
+# File
+{% if vhost.file is defined %}
+    {% for file in vhost.file %}
+        <FilesMatch "{{ file.path }}">
+            {{ file.config }}
+        </FilesMatch>
+    {% endfor %}
+{% endif %}
+
+
+</VirtualHost>
+{% endfor %}

@@ -1,2 +1,70 @@
 ---
+- name: Update apt cache.
+  apt: 
+    update_cache: true
+    cache_valid_time: 3600
 
+- name: Install apache packages (Debian)
+  package:
+    name: "{{ apache_packages }}"
+    state: present
+
+- name: Set Apache port
+  lineinfile:
+    dest: "{{ apache_server_conf }}/ports.conf"
+    regexp: "{{ apache_ports_configuration_items.regexp }}"
+    line: "{{ apache_ports_configuration_items.line }}"
+    state: present
+  with_items: "{{ apache_ports_configuration_items }}"
+  notify: Restart apache
+
+- name: Update security.conf
+  lineinfile:
+    dest: "{{ apache_server_conf }}/security.conf"
+    regexp: "{{apache_security_configuration_items.regexp }}"
+    line: "{{ apache_security_configuration_items.line }}"
+    state: present
+  notify: Restart apache
+
+- name: Enable apache mods
+  apache2_module:
+    state: present
+    name: "{{ apache_mods_enabled }}"
+  notify: Restart apache
+
+- name: Disable apache mods
+  apache2_module:
+    state: absent
+    name: "{{ apache_mods_disabled }}"
+  notify: Restart apache
+
+- name: Add vhosts
+  template:
+      src: "vhosts.conf.j2"
+      dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
+      owner: root
+      group: root
+      mode: "0644"
+  notify: Restart apache
+  when: apache_create_vhosts
+
+- name: Delete default vhosts in site-enabled
+  file:
+    path: "{{ apache_conf_path }}/sites-enabled/{{ apache_default_vhost_filename }}"
+    state: absent
+  notify: Restart apache
+  when: apache_remove_default_vhost
+
+- name: Vhost symlink in site-enabled
+  file:
+    src: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename}}"
+    dest: "{{ apache_conf_path }}/sites-enabled/{{ apache_vhosts_filename }}"
+    state: link
+  notify: Restart apache
+  when: apache_create_vhosts
+
+- name: Start apache on boot
+  service:
+    name: "{{ apache_service }}"
+    state: "started"
+    enabled: true
