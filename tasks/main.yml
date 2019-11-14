@@ -15,7 +15,6 @@
     regexp: "{{ apache_ports_configuration_items.regexp }}"
     line: "{{ apache_ports_configuration_items.line }}"
     state: present
-  with_items: "{{ apache_ports_configuration_items }}"
   notify: Restart apache
 
 - name: Update security.conf
