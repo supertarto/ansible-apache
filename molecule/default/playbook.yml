@@ -13,7 +13,7 @@
 
   vars:
     apache_mods_enabled:
-      - ssl
+      - "ssl"
     apache_create_vhosts: true
     apache_vhosts_filename: "mysite.conf"
     apache_vhost_config:
