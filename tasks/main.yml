@@ -30,13 +30,15 @@
 - name: Enable apache mods
   apache2_module:
     state: present
-    name: "{{ apache_mods_enabled }}"
+    name: "{{ item }}"
+  with_items: "{{ apache_mods_enabled }}"
   notify: Restart apache
 
 - name: Disable apache mods
   apache2_module:
     state: absent
-    name: "{{ apache_mods_disabled }}"
+    name: "{{ item }}"
+  with_items: "{{ apache_mods_disabled }}"
   notify: Restart apache
 
 - name: Add vhosts
