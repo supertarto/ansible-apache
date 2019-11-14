@@ -74,7 +74,7 @@ apache_vhost_config:
     serveradmin: admin@localhost
     custom_param: |
         ProxyRequests Off
-	    ProxyPreserveHost On
+        ProxyPreserveHost On
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
         LogLevel warn
@@ -95,12 +95,12 @@ apache_vhost_config:
         - path: "/"
           config: |
             Options -Indexes
-		    Options -Includes
-		    Options -FollowSymLinks
+            Options -Includes
+            Options -FollowSymLinks
 		    ProxyPass http://localhost:8080/ min=0 max=100 smax=50 ttl=10
 		    ProxyPassReverse http://localhost/
     file:
-        - path: "\.(cgi|shtml|phtml|php)$"
+        - path: '\.(cgi|shtml|phtml|php)$'
           config: |
             SSLOptions +StdEnvVars
 ```
@@ -111,6 +111,7 @@ apache_vhost_config:
 - hosts: somehost
   roles:
     - supertarto.apache
+
   vars:
     apache_mods_enabled: []
         - ssl
