@@ -21,7 +21,7 @@
 - name: Update security.conf
   lineinfile:
     dest: "{{ apache_server_conf }}/security.conf"
-    regexp: "{{apache_security_configuration_items.regexp }}"
+    regexp: "{{ apache_security_configuration_items.regexp }}"
     line: "{{ apache_security_configuration_items.line }}"
     state: present
   notify: Restart apache
@@ -57,7 +57,7 @@
 
 - name: Vhost symlink in site-enabled
   file:
-    src: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename}}"
+    src: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
     dest: "{{ apache_conf_path }}/sites-enabled/{{ apache_vhosts_filename }}"
     state: link
   notify: Restart apache
