@@ -20,7 +20,7 @@
 
 - name: Update security.conf
   lineinfile:
-    dest: "{{ apache_server_conf }}/security.conf"
+    dest: "{{ apache_server_conf }}/conf/security.conf"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
