@@ -1,6 +1,6 @@
 ---
 - name: Update apt cache.
-  apt: 
+  apt:
     update_cache: true
     cache_valid_time: 3600
 
@@ -40,11 +40,11 @@
 
 - name: Add vhosts
   template:
-      src: "vhosts.conf.j2"
-      dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
-      owner: root
-      group: root
-      mode: "0644"
+    src: "vhosts.conf.j2"
+    dest: "{{ apache_conf_path }}/sites-available/{{ apache_vhosts_filename }}"
+    owner: root
+    group: root
+    mode: "0644"
   notify: Restart apache
   when: apache_create_vhosts
 

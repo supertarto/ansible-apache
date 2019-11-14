@@ -29,6 +29,6 @@ apache_vhosts_filename: "my-vhosts.conf"
 
 apache_remove_default_vhost: true
 apache_default_vhost_filename:
- - 000-default.conf
+  - 000-default.conf
 
 apache_vhost_config: []
