@@ -15,7 +15,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-  with_items: {{ apache_ports_configuration_items }}
+  with_items: "{{ apache_ports_configuration_items }}"
   notify: Restart apache
 
 - name: Update security.conf
@@ -24,7 +24,7 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
     state: present
-  with_items: {{ apache_security_configuration_items }}
+  with_items: "{{ apache_security_configuration_items }}"
   notify: Restart apache
 
 - name: Enable apache mods
