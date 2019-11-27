@@ -107,7 +107,6 @@ apache_vhost_config:
 
 ## Examples
 ```yml
----
 - hosts: somehost
   roles:
     - supertarto.apache
@@ -146,7 +145,6 @@ apache_vhost_config:
                     AllowOverride All
                     Order deny,allow
                     allow from all            
-```
 ```
 ## Installation
 ```
