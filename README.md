@@ -75,36 +75,36 @@ apache_vhost_config:
     documentroot: "/var/www/html"
     serveradmin: admin@localhost
     custom_param: |
-        ProxyRequests Off
-        ProxyPreserveHost On
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-        LogLevel warn
+      ProxyRequests Off
+      ProxyPreserveHost On
+      ErrorLog ${APACHE_LOG_DIR}/error.log
+      CustomLog ${APACHE_LOG_DIR}/access.log combined
+      LogLevel warn
     ssl_engine: "on"
     ssl_certificate_file: /etc/ssl/certs/certif.crt
     ssl_certificate_key_file: /etc/ssl/private/certif.key
     ssl_certificate_chain_file: /etc/ssl/certs/chain
     directory:
-        - path: "/var/www/html"
-          config: |
-            AllowOverride All
-            Order deny,allow
-            allow from all
-        - path: "/usr/lib/cgi-bin"
-          config: |
-            SSLOptions +StdEnvVars
+      - path: "/var/www/html"
+        config: |
+          AllowOverride All
+          Order deny,allow
+          allow from all
+      - path: "/usr/lib/cgi-bin"
+        config: |
+          SSLOptions +StdEnvVars
     location:
-        - path: "/"
-          config: |
-            Options -Indexes
-            Options -Includes
-            Options -FollowSymLinks
-		    ProxyPass http://localhost:8080/ min=0 max=100 smax=50 ttl=10
-		    ProxyPassReverse http://localhost/
+      - path: "/"
+        config: |
+          Options -Indexes
+          Options -Includes
+          Options -FollowSymLinks
+		      ProxyPass http://localhost:8080/ min=0 max=100 smax=50 ttl=10
+		      ProxyPassReverse http://localhost/
     file:
-        - path: '\.(cgi|shtml|phtml|php)$'
-          config: |
-            SSLOptions +StdEnvVars
+      - path: '\.(cgi|shtml|phtml|php)$'
+        config: |
+          SSLOptions +StdEnvVars
 ```
 
 ## Examples
@@ -114,7 +114,7 @@ apache_vhost_config:
     - supertarto.apache
 
   vars:
-    apache_mods_enabled: []
+    apache_mods_enabled:
         - ssl
     apache_create_vhosts: true
     apache_vhosts_filename: "mysite.conf"
@@ -126,27 +126,27 @@ apache_vhost_config:
             Redirect / https://host1
 
         - listen_ip: "*"
-            listen_port: 443
-            server_name: host1
-            serveralias: alias1
-            documentroot: "/var/www/html"
-            serveradmin: admin@localhost
-            custom_param: |
-                ProxyRequests Off
-                ProxyPreserveHost On
-                ErrorLog ${APACHE_LOG_DIR}/error.log
-                CustomLog ${APACHE_LOG_DIR}/access.log combined
-                LogLevel warn
-            ssl_engine: "on"
-            ssl_certificate_file: /etc/ssl/certs/certif.crt
-            ssl_certificate_key_file: /etc/ssl/private/certif.key
-            ssl_certificate_chain_file: /etc/ssl/certs/chain
-            directory:
-                - path: "/var/www/html"
-                  config: |
-                    AllowOverride All
-                    Order deny,allow
-                    allow from all            
+          listen_port: 443
+          server_name: host1
+          serveralias: alias1
+          documentroot: "/var/www/html"
+          serveradmin: admin@localhost
+          custom_param: |
+            ProxyRequests Off
+            ProxyPreserveHost On
+            ErrorLog ${APACHE_LOG_DIR}/error.log
+            CustomLog ${APACHE_LOG_DIR}/access.log combined
+            LogLevel warn
+          ssl_engine: "on"
+          ssl_certificate_file: /etc/ssl/certs/certif.crt
+          ssl_certificate_key_file: /etc/ssl/private/certif.key
+          ssl_certificate_chain_file: /etc/ssl/certs/chain
+          directory:
+            - path: "/var/www/html"
+              config: |
+                AllowOverride All
+                Order deny,allow
+                allow from all            
 ```
 ## Installation
 ```
