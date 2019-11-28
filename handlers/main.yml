@@ -1,4 +1,10 @@
 ---
+- name: Start apache on boot
+  service:
+    name: "{{ apache_service }}"
+    state: "started"
+    enabled: true
+
 - name: Restart apache
   service:
     name: "{{ apache_service }}"

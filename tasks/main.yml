@@ -8,6 +8,7 @@
   package:
     name: "{{ apache_packages }}"
     state: present
+  notify: Start apache on boot
 
 - name: Set Apache port
   lineinfile:
@@ -65,9 +66,3 @@
     state: link
   notify: Restart apache
   when: apache_create_vhosts
-
-- name: Start apache on boot
-  service:
-    name: "{{ apache_service }}"
-    state: "started"
-    enabled: true
