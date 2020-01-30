@@ -22,31 +22,29 @@
         SSLCertificateChainFile {{ vhost.ssl_certificate_chain_file }}
     {% endif%}
 {% endif %}
-# Directory
+
 {% if vhost.directory is defined %}
-    {% for directory in vhost.directory %}
-        <Directory "{{ directory.path }}">
-            {{ directory.config }}
-        </Directory>
-    {% endfor %}
+  {% for directory in vhost.directory %}
+    <Directory {{ directory.path }}>
+        {{ directory.config }}
+    </Directory>
+  {% endfor %}
 {% endif %}
-# Location
+
 {% if vhost.location is defined %}
-    {% for location in vhost.location %}
-        <Location "{{ location.path }}">
-            {{ location.config }}
-        </Location>
-    {% endfor %}
+  {% for location in vhost.location %}
+    <Location "{{ location.path }}">
+        {{ location.config }}
+    </Location>
+  {% endfor %}
 {% endif %}
-# File
+
 {% if vhost.file is defined %}
-    {% for file in vhost.file %}
-        <FilesMatch "{{ file.path }}">
-            {{ file.config }}
-        </FilesMatch>
-    {% endfor %}
+  {% for file in vhost.file %}
+    <FilesMatch "{{ file.path }}">
+        {{ file.config }}
+    </FilesMatch>
+  {% endfor %}
 {% endif %}
-
-
 </VirtualHost>
 {% endfor %}
