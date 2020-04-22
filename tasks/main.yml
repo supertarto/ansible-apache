@@ -54,8 +54,9 @@
 
 - name: Delete default vhosts in site-enabled
   file:
-    path: "{{ apache_server_conf }}/sites-enabled/{{ apache_default_vhost_filename }}"
+    path: "{{ apache_server_conf }}/sites-enabled/{{ item }}"
     state: absent
+  with_items: "{{ apache_default_vhost_filename }}"
   notify: Restart apache
   when: apache_remove_default_vhost
 
