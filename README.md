@@ -1,5 +1,5 @@
 # Ansible apache
-[![Build Status](https://travis-ci.org/supertarto/ansible-apache.svg?branch=master)](https://travis-ci.org/supertarto/ansible-apache)
+[![Build Status](https://travis-ci.com/supertarto/ansible-apache.svg?branch=master)](https://travis-ci.com/supertarto/ansible-apache)
 
 Install and configure apache with ansible.
 
