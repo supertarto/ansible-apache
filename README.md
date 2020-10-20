@@ -1,5 +1,4 @@
 # Ansible apache
-[![Ansible Role](https://galaxy.ansible.com/supertarto/apache)](https://galaxy.ansible.com/supertarto/apache)
 [![Build Status](https://travis-ci.com/supertarto/ansible-apache.svg?branch=master)](https://travis-ci.com/supertarto/ansible-apache)
 
 Install and configure apache with ansible.
