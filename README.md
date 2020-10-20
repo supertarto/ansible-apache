@@ -98,8 +98,8 @@ apache_vhost_config:
           Options -Indexes
           Options -Includes
           Options -FollowSymLinks
-		      ProxyPass http://localhost:8080/ min=0 max=100 smax=50 ttl=10
-		      ProxyPassReverse http://localhost/
+          ProxyPass http://localhost:8080/ min=0 max=100 smax=50 ttl=10
+          ProxyPassReverse http://localhost/
     file:
       - path: '\.(cgi|shtml|phtml|php)$'
         config: |
