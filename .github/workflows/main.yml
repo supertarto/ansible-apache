@@ -10,7 +10,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'geerlingguy.apache'
+    working-directory: 'supertarto.apache'
 
 jobs:
 
