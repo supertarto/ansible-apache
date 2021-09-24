@@ -9,6 +9,7 @@ None
 
 ## Tested plateform
 * Debian 10 (Buster)
+* Debian 11 (Bulleyes)
 
 ## Role variables
 The apache service, the apache conf path and packages to install.

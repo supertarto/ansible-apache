@@ -10,6 +10,7 @@ galaxy_info:
     - name: "Debian"
       versions:
         - "buster"
+        - "bulleyes"
 
   galaxy_tags:
     - webserver
