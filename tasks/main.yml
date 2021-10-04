@@ -1,17 +1,17 @@
 ---
 - name: Update apt cache.
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
 
 - name: Install apache packages (Debian)
-  package:
+  ansible.builtin.package:
     name: "{{ apache_packages }}"
     state: present
   notify: Start apache on boot
 
 - name: Set Apache port
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ apache_server_conf }}/ports.conf"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -20,7 +20,7 @@
   notify: Restart apache
 
 - name: Update security.conf
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: "{{ apache_server_conf }}/conf-available/security.conf"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -29,21 +29,21 @@
   notify: Restart apache
 
 - name: Enable apache mods
-  apache2_module:
+  ansible.builtin.apache2_module:
     state: present
     name: "{{ item }}"
   with_items: "{{ apache_mods_enabled }}"
   notify: Restart apache
 
 - name: Disable apache mods
-  apache2_module:
+  ansible.builtin.apache2_module:
     state: absent
     name: "{{ item }}"
   with_items: "{{ apache_mods_disabled }}"
   notify: Restart apache
 
 - name: Add vhosts
-  template:
+  ansible.builtin.template:
     src: "vhosts.conf.j2"
     dest: "{{ apache_server_conf }}/sites-available/{{ apache_vhosts_filename }}"
     owner: root
@@ -53,7 +53,7 @@
   when: apache_create_vhosts
 
 - name: Delete default vhosts in site-enabled
-  file:
+  ansible.builtin.file:
     path: "{{ apache_server_conf }}/sites-enabled/{{ item }}"
     state: absent
   with_items: "{{ apache_default_vhost_filename }}"
@@ -61,7 +61,7 @@
   when: apache_remove_default_vhost
 
 - name: Vhost symlink in site-enabled
-  file:
+  ansible.builtin.file:
     src: "{{ apache_server_conf }}/sites-available/{{ apache_vhosts_filename }}"
     dest: "{{ apache_server_conf }}/sites-enabled/{{ apache_vhosts_filename }}"
     state: link
