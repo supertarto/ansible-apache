@@ -1,6 +1,6 @@
 # Ansible apache
 
-[![CI](https://github.com/supertarto/ansible-apache/workflows/CI/badge.svg?event=push)](https://github.com/supertarto/ansible-apache//actions?query=workflow%3ACI)
+[![CI](https://github.com/supertarto/ansible-apache/actions/workflows/ci.yml/badge.svg)](https://github.com/supertarto/ansible-apache/actions/workflows/ci.yml)
 
 Install and configure apache with ansible.
 TEST
