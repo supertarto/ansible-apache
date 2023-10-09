@@ -3,13 +3,13 @@
 [![CI](https://github.com/supertarto/ansible-apache/actions/workflows/ci.yml/badge.svg)](https://github.com/supertarto/ansible-apache/actions/workflows/ci.yml)
 
 Install and configure apache with ansible.
-TEST
+
 ## Requirements
 None
 
 ## Tested plateform
 * Debian 10 (Buster)
-* Debian 11 (Bulleyes)
+* Debian 11 (Bullseye)
 * Debian 12 (Bookworm)
 
 ## Role variables
